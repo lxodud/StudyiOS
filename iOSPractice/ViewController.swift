@@ -7,13 +7,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
+    let someView = CustomView()
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        configureLayout()
     }
-
-
 }
 
+extension ViewController {
+    private func configureLayout() {
+        view.addSubview(someView)
+        someView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            someView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            someView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
+            someView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.5),
+            someView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.2),
+        ])
+    }
+}
